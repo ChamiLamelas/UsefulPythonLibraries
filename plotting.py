@@ -9,7 +9,8 @@ def save(file, format=None):
 
 
 def make_plot_nice(ax, xlabel, ylabel, ymin, ymax, fontsize=16, legendcol=1):
-    ax.legend(fontsize=fontsize, ncol=legendcol, frameon=False)
+    if legendcol is not None:
+        ax.legend(fontsize=fontsize, ncol=legendcol, frameon=False)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     ax.tick_params('y', labelsize=fontsize)
@@ -17,3 +18,4 @@ def make_plot_nice(ax, xlabel, ylabel, ymin, ymax, fontsize=16, legendcol=1):
     ax.set_xlabel(xlabel, fontsize=fontsize)
     ax.set_ylabel(ylabel, fontsize=fontsize)
     ax.set_ylim([ymin, ymax])
+    ax.grid()
