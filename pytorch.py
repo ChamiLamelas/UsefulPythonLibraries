@@ -1,3 +1,7 @@
+"""
+PyTorch installation: https://pytorch.org/get-started/locally/
+"""
+
 import torch
 import sys
 
