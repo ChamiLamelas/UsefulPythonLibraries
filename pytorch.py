@@ -1,6 +1,11 @@
 import torch
 import sys
 
-print(sys.version)
-print(torch.cuda.device_count())
-print(torch.cuda.is_available())
+DESCRIPTION = f"""
+Python version: {sys.version}
+PyTorch version: {torch.__version__}
+Number of CUDA devices seen by PyTorch: {torch.cuda.device_count()}
+Whether CUDA is available in PyTorch installation: {torch.cuda.is_available()}
+"""
+
+print(DESCRIPTION)
