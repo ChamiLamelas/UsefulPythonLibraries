@@ -2,10 +2,13 @@
 PyTorch installation: https://pytorch.org/get-started/locally/
 """
 
+import platform
 import torch
 import sys
 
 DESCRIPTION = f"""
+Operating System: 
+\t{platform.system()} {platform.release()}
 Python version:
 \t{sys.version}
 PyTorch version:
