@@ -20,7 +20,7 @@ def get_check_int_greater_than(val_min):
     return check_int_greater
 
 
-def get_one_argument(argument, argument_help, description):
+def get_one_argument(argument, description, **kwargs):
     """
     Sets up ArgumentParser to parse a single command line argument
 
@@ -28,11 +28,11 @@ def get_one_argument(argument, argument_help, description):
         argument: str
             The name of the argument 
 
-        argument_help: str
-            The help text for said argument
-
         description: str
             The help text for the program
+
+        kwargs: **
+            Any other keyword arguments for the argument (e.g. help, type, choices, etc.)
 
     Returns:
         The parsed argument
@@ -41,7 +41,7 @@ def get_one_argument(argument, argument_help, description):
     parser = argparse.ArgumentParser(
         description=description, formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument(
-        argument, type=str, help=argument_help)
+        argument, **kwargs)
     return next(iter(vars(parser.parse_args()).values()))
 
 
