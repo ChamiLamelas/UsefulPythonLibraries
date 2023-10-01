@@ -4,6 +4,29 @@ import pickle
 import os
 
 
+
+
+def write_json(data, file, append=False):
+    mode = ('a' if append else 'w') + '+'
+    with open(file, mode, encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
+
+def read_json(file):
+    with open(file, 'r', encoding='utf-8') as f:
+        return json.load(f)
+
+
+def add_extension(file, extension):
+    if not extension.startswith('.'):
+        extension = '.' + extension
+    return (file + extension) if not file.lower().endswith(extension) else file
+
+
+def drop_extension(file):
+    return file[:file.index('.')] if '.' in file else file
+
+
 def file_exists(filepath, errmsg=None):
     """Enforces that filepath is a file"""
 
