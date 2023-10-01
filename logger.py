@@ -6,6 +6,7 @@ import time
 import pytz
 import sys
 import os
+import files
 
 def nice_seconds_string(seconds):
     return str(timedelta(seconds=ceil(seconds)))
@@ -70,10 +71,10 @@ class TimedLogger:
     def start(self, log_file=None, task=None):
         if log_file is None:
             log_file = curr_time_est('%Y%m%d_%H%M%S')
-        self.log_file = add_extension(
+        self.log_file = files.add_extension(
             os.path.join(self.log_folder, log_file), 'log')
         if not self.persist:
-            clear_files(self.log_file)
+            os.remove(self.log_file)
         self.logger.handlers.clear()
         fh = logging.FileHandler(self.log_file)
         fh.setLevel(logging.DEBUG)
@@ -112,13 +113,13 @@ class ML_Logger(TimedLogger):
 
     def start(self, log_file=None, metrics_file=None, task=None):
         super().start(log_file, task)
-        self.metrics_file = add_extension(drop_extension(
+        self.metrics_file = files.add_extension(files.drop_extension(
             self.log_file) if metrics_file is None else os.path.join(self.log_folder, metrics_file), '_metrics.json')
         if not self.persist:
-            clear_files(self.metrics_file)
+            os.remove(self.metrics_file)
 
     def log_metrics(self, metrics, message=None, info=False):
-        write_json(metrics, self.metrics_file, append=True)
+        files.write_json(metrics, self.metrics_file, append=True)
         if message is not None:
             if info:
                 self.info(message)
