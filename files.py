@@ -60,9 +60,15 @@ def check_and_make(*dirpaths, overwrite=False):
             mkdir(dirpath)
 
 
+def delete_files(*files):
+    for file in files:
+        if os.path.isfile(file):
+            os.remove(file)
+
 def clear_files(*files):
     for file in files:
-        Path(file).write_text("")
+        if os.path.isfile(file):
+            Path(file).write_text("")
 
 
 def read_pickle(filepath):
