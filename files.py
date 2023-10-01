@@ -21,8 +21,6 @@ def write_json(data, file, append=False):
 
 
 def add_extension(file, extension):
-    if not extension.startswith('.'):
-        extension = '.' + extension
     return (file + extension) if not file.lower().endswith(extension) else file
 
 
