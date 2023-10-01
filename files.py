@@ -3,18 +3,21 @@ import shutil
 import pickle
 import os
 
-
-
-
-def write_json(data, file, append=False):
-    mode = ('a' if append else 'w') + '+'
-    with open(file, mode, encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
-
-
 def read_json(file):
     with open(file, 'r', encoding='utf-8') as f:
         return json.load(f)
+
+
+def write_json(data, file, append=False):
+    if not isinstance(data, dict):
+        raise TypeError(f"data was {type(data)}, must be dict")
+    new_data = read_json(file) if append and os.path.isfile(file) else list()
+    new_data.append(data)
+    with open(file, 'w+', encoding='utf-8') as f:
+        json.dump(new_data, f, ensure_ascii=False, indent=4)
+
+
+
 
 
 def add_extension(file, extension):
