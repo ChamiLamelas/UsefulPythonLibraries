@@ -108,10 +108,6 @@ class TimedLogger:
         self.logger.error(message)
 
 
-class ML_LoggerException(Exception):
-    pass
-
-
 class ML_Logger(TimedLogger):
 
     def start(self, log_file=None, metrics_file=None, task=None):
@@ -122,9 +118,6 @@ class ML_Logger(TimedLogger):
             clear_files(self.metrics_file)
 
     def log_metrics(self, metrics, message=None, info=False):
-        if not isinstance(metrics, dict):
-            raise ML_LoggerException(
-                f'metrics must be a dict (is {type(metrics)})')
         write_json(metrics, self.metrics_file, append=True)
         if message is not None:
             if info:
