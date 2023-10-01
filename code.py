@@ -1,5 +1,7 @@
 import inspect
 
+def get_caller():
+    return inspect.stack()[1].function
 
 def get_func_byname(module, func_name, substitute):
     """Gets function object by name from module object, errors are thrown if a function with that name cannot be created"""
