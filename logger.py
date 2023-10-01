@@ -72,7 +72,7 @@ class TimedLogger:
         if log_file is None:
             log_file = curr_time_est('%Y%m%d_%H%M%S')
         self.log_file = files.add_extension(
-            os.path.join(self.log_folder, log_file), 'log')
+            os.path.join(self.log_folder, log_file), '.log')
         if not self.persist:
             os.remove(self.log_file)
         self.logger.handlers.clear()
