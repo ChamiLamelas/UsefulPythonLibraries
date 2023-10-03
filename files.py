@@ -4,16 +4,19 @@ import pickle
 import os
 import json
 
+
 def read_json(file):
     with open(file, 'r', encoding='utf-8') as f:
         return json.load(f)
 
-
 def write_json(data, file, append=False):
-    if not isinstance(data, dict):
-        raise TypeError(f"data was {type(data)}, must be dict")
-    new_data = read_json(file) if append and os.path.isfile(file) else list()
-    new_data.append(data)
+    if append: 
+        if not isinstance(data, dict):
+            raise TypeError(f"data was {type(data)}, must be dict to append")
+        new_data = read_json(file) if os.path.isfile(file) else list()
+        new_data.append(data)
+    else:
+        new_data = data
     with open(file, 'w+', encoding='utf-8') as f:
         json.dump(new_data, f, ensure_ascii=False, indent=4)
 
