@@ -11,7 +11,7 @@ def make_plot_nice(ax, xlabel, ylabel, ymin, ymax, fontsize=16, legendcol=1, tit
     if legendcol is not None:
         ax.legend(fontsize=fontsize, ncol=legendcol, frameon=False)
     if title is not None:
-        ax.suptitle(
+        ax.set_title(
             title, fontsize=titlefontsize if titlefontsize is not None else fontsize)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
